@@ -1,9 +1,8 @@
 //type 'npm install web3' in the terminal in the folder this file is in. (you need to download node.js if this does not work.)
 //run the program by typing 'node ens.js' in the terminal from the folder this file is in.
 //you also need to change your project id to your own. you can get one from infura.
-//type the list into "ensNames.txt" one word perline, without '.eth'
-
-
+//type the names into "ensNames.txt" one word per line, without '.eth'. 
+//it will ignore every whitespace before the first word, and ignore every word after the first word
 
 const Web3 = require('web3');
 const fs = require('fs');
@@ -40,11 +39,10 @@ async function avalibeEnsNamesFromFile(file) {
   console.log('The avalible names are:')
   console.log('---------------------------------------')
   for await (const line of rl) {
-        ens.ensLedig(line+'.eth')
+        ens.ensLedig(line.toLowerCase().trim().split(/\s+/,1)+'.eth')
 
   }
 }
-
 
 const projectid='7cb4f0f0282d403bad7078356f74a019'; //this is your project id from infura
 let ens=new EnsChecker(projectid);
